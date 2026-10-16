@@ -3,12 +3,12 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
+public class Book extends Section{
     String title;
     List<Author> authors = new ArrayList<>();
     List<Element> content = new ArrayList<>();
     public Book(String title) {
-        this.title = title;
+        super(title);
     }
 
     public void addContents(Element element) {
@@ -32,7 +32,15 @@ public class Book {
         }
         System.out.println("\n");
         for (Element element : content) {
-            element.print();
+            element.render();
+        }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        for (Element element : elements) {
+            element.accept(visitor);
         }
     }
 }
