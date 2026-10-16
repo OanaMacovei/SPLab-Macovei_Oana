@@ -19,10 +19,18 @@ public class Section implements Element {
     }
 
    @Override
-    public void print() {
+    public void render() {
         System.out.println(this.title);
         for (Element element : elements) {
-            element.print();
+            element.render();
         }
    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        for (Element element : elements) {
+            element.accept(visitor);
+        }
+    }
 }

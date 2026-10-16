@@ -1,5 +1,6 @@
 package org.example;
 
 public interface Element {
-    void print();
+    void render();
+    void accept(Visitor visitor);
 }

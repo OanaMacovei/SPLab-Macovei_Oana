@@ -20,7 +20,10 @@ public class Image implements Element{
     }
 
     @Override
-    public void print() {
+    public void render() {
         System.out.println("Image with name: " + this.url);
     }
+
+    @Override
+    public void accept(Visitor visitor) {}
 }

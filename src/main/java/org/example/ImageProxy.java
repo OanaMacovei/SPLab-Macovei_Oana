@@ -33,7 +33,12 @@ public class ImageProxy implements Picture, Element{
         return realImage;
     }
 
-    public void print() {
-        loadImage().print();
+    public void render() {
+        loadImage().render();
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

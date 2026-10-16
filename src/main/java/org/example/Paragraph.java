@@ -21,12 +21,17 @@ public class Paragraph implements Element {
 
 
     @Override
-    public void print() {
+    public void render() {
         if (this.textAlignment != null) {
             this.textAlignment.render(this, 30);
         }
         else {
             System.out.println("Paragraph: " + this.text);
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit( this);
     }
 }
