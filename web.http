@@ -1,0 +1,25 @@
+### 1. Creare carte
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Design Patterns: Elements of Reusable Object-Oriented Software"
+}
+
+
+### 2. Verificare status procesare asincrona
+GET http://localhost:8080/books/status/<126ea9d1-f148-4a49-aaf3-2188b63b6373>
+
+### 3. Listare toate cartile
+GET http://localhost:8080/books
+
+### 4. Afisare carte dupa ID
+GET http://localhost:8080/books/1
+
+### 5. Creare carte
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Book2"
+}
