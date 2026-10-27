@@ -1,13 +1,22 @@
 package org.example;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Section implements Element {
     String title;
+    @Getter
     List<Element> elements = new ArrayList<>();
     public Section(String title) {
         this.title = title;
+    }
+
+    public Section() {}
+
+    public List<Element> getElements() {
+        return elements;
     }
 
     public void add(Element element) {
@@ -18,7 +27,7 @@ public class Section implements Element {
         this.elements.remove(element);
     }
 
-   @Override
+    @Override
     public void render() {
         System.out.println(this.title);
         for (Element element : elements) {

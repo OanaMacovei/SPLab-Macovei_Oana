@@ -11,6 +11,12 @@ public class Book extends Section{
         super(title);
     }
 
+    public Book() {}
+
+    public String getTitle() {
+        return this.title;
+    }
+
     public void addContents(Element element) {
         this.content.add(element);
     }
