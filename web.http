@@ -21,5 +21,97 @@ POST http://localhost:8080/books
 Content-Type: application/json
 
 {
-  "title": "Book2"
+  "title": "Amintiri din copilarie",
+  "authors": [
+    {
+      "name": "Ion",
+      "surname": "Creanga"
+    }
+  ]
+}
+
+### 6. Creeare carte mai vasta
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Carte cu Structura",
+  "authors": [
+    {
+      "name": "Mihai",
+      "surname": "Eminescu"
+    }
+  ],
+  "elements": [
+    {
+      "title": "Capitolul 1"
+    }
+  ]
+}
+
+
+### 7. Creare carte completa
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Design Patterns",
+  "authors": [
+    {
+      "name": "Erich",
+      "surname": "Gamma"
+    },
+    {
+      "name": "Richard",
+      "surname": "Helm"
+    }
+  ],
+  "elements": [
+    {
+      "type": "paragraph",
+      "text": "Introducere in sabloane."
+    }
+  ]
+}
+
+### -. Creare carte completa de elemente
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+  "authors": [
+    {
+      "name": "Erich",
+      "surname": "Gamma"
+    },
+    {
+      "name": "Richard",
+      "surname": "Helm"
+    }
+  ],
+  "elements": [
+    {
+      "type": "paragraph",
+      "text": "Acesta este un paragraf introductiv salvat direct in carte."
+    },
+    {
+      "type": "image_proxy",
+      "url": "https://example.com/diagrama-clase.png"
+    },
+    {
+      "type": "table",
+      "attributes": "border=1;rows=5;cols=3"
+    },
+    {
+      "type": "section",
+      "title": "Capitolul 1: Sabloane Creationale",
+      "elements": [
+        {
+          "type": "paragraph",
+          "text": "Paragraf imbricat in interiorul primei sectiuni."
+        }
+      ]
+    }
+  ]
 }

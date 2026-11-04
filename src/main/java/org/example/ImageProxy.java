@@ -1,15 +1,27 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.*;
 
-public class ImageProxy implements Picture, Element{
+@Entity
+@Getter
+@Setter
+public class ImageProxy extends BaseElement implements Picture{
     String url;
     Dimension dim;
+
+    @Transient
     Image realImage;
 
     public ImageProxy(String url) {
         this.url = url;
     }
+
+    public ImageProxy() {}
 
     @Override
     public String url() {

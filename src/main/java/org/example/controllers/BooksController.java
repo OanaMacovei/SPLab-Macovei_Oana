@@ -30,7 +30,7 @@ public class BooksController {
     }
     // 2. GET /books/{id} - Sincron
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable int id) {
+    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         GetBookByIdCommand cmd = new GetBookByIdCommand(booksService, id);
         Book book = executor.executeSynchronous(cmd);
         return book != null ? ResponseEntity.ok(book) : ResponseEntity.notFound().build();
@@ -53,14 +53,14 @@ public class BooksController {
 
     // 4. PUT /books/{id} - Sincron
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
         Book updated = booksService.updateBook(id, book);
         return ResponseEntity.ok(updated);
     }
 
     // 5. DELETE /books/{id} - Sincron
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBook(@PathVariable int id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         boolean deleted = booksService.deleteBook(id);
         return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }

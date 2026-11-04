@@ -1,9 +1,15 @@
 package org.example;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+
 import java.util.concurrent.TimeUnit;
 
-public class Image implements Element{
+@Entity
+public class Image extends BaseElement{
     String url;
+
+    @Transient
     ImageContent content;
 
     public Image(String name) {
@@ -14,6 +20,8 @@ public class Image implements Element{
             e.printStackTrace();
         }
     }
+
+    public Image() {}
 
     public ImageContent content() {
         return this.content;
