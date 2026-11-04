@@ -1,9 +1,14 @@
 package org.example;
 
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TableOfContents implements Element{
+@Entity
+public class TableOfContents extends BaseElement{
+    @ElementCollection
     public List<String> entries = new ArrayList<>();
 
     public void addEntry(String entry) {
@@ -14,6 +19,7 @@ public class TableOfContents implements Element{
         return this.entries;
     }
 
+    public TableOfContents() {}
 
     @Override
     public void render() {

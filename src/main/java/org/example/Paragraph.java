@@ -1,18 +1,30 @@
 package org.example;
 
-public class Paragraph implements Element {
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@Access(AccessType.FIELD)
+@Getter
+@Setter
+public class Paragraph extends BaseElement {
     String text;
+
+    @Transient
     AlignStrategy textAlignment;
     public Paragraph(String text) {
         this.text = text;
     }
 
+    public Paragraph() {}
+
     public int getLength(String text) {
         return text.length();
-    }
-
-    public String getText() {
-        return text;
     }
 
     public void setAlignStrategy(AlignStrategy alignment) {

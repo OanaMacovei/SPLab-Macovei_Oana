@@ -1,6 +1,7 @@
 package org.example.services;
 
 import org.example.Book;
+import org.example.persistence.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,20 +11,19 @@ import java.util.Map;
 
 @Service
 public class BookService {
-    public Map<Integer, Book> books = new HashMap<>();
-    int idCounter = 1;
+    //public Map<Integer, Book> books = new HashMap<>();
+    public CrudRepository<Book, Long> booksRepository;
 
-    public BookService() {
-        Book sampleBook = new Book("Design Patterns");
-        books.put(1, sampleBook);
+    public BookService(CrudRepository<Book, Long> booksRepository) {
+        this.booksRepository = booksRepository;
     }
 
     public List<Book> getAllBooks() {
-        return new ArrayList<>(books.values());
+        return booksRepository.findAll();
     }
 
-    public Book getBookById(int id) {
-        return books.get(id);
+    public Book getBookById(Long id) {
+        return booksRepository.findById(id).orElse(null);
     }
 
     public Book createBook(Book book) {
@@ -33,22 +33,22 @@ public class BookService {
             Thread.currentThread().interrupt();
         }
 
-        int id = idCounter++;
-        books.put(id, book);
-        return book;
+        return booksRepository.save(book);
     }
 
-    public Book updateBook(int id, Book book) {
-        books.put(id, book);
-        return book;
-    }
-
-    public boolean deleteBook(int id) {
-        if (id != 0) {
-            books.remove(id);
-            return true;
-        } else {
-            return false;
+    public Book updateBook(Long id, Book book) {
+        if (booksRepository.existById(id)) {
+            book.setId(id);
+            return booksRepository.save(book);
         }
+        return null;
+    }
+
+    public boolean deleteBook(Long id) {
+        if (booksRepository.existById(id)) {
+            booksRepository.deletedById(id);
+            return true;
+        }
+        return false;
     }
 }

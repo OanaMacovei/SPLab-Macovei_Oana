@@ -1,12 +1,11 @@
 package org.example;
 
+import lombok.Getter;
+
 public class GenerateToc implements Visitor {
+    @Getter
     public TableOfContents toc = new TableOfContents();
     public int index = 1;
-
-    public TableOfContents getToc() {
-        return this.toc;
-    }
 
     @Override
     public void visit(Book b) {

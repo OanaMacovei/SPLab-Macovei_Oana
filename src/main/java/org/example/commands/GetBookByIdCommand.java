@@ -7,9 +7,9 @@ import java.util.List;
 
 public class GetBookByIdCommand implements Command<Book> {
     public BookService booksService;
-    int id;
+    Long id;
 
-    public GetBookByIdCommand(BookService booksService, int id) {
+    public GetBookByIdCommand(BookService booksService, Long id) {
         this.booksService = booksService;
         this.id = id;
     }
