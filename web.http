@@ -115,3 +115,27 @@ Content-Type: application/json
     }
   ]
 }
+
+### 9. Creare carte again
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "Design Patterns2",
+  "authors": [
+    {
+      "name": "Erich2",
+      "surname": "Gamma2"
+    },
+    {
+      "name": "Richard2",
+      "surname": "Helm2"
+    }
+  ],
+  "elements": [
+    {
+      "type": "paragraph",
+      "text": "Introducere in sabloane.2"
+    }
+  ]
+}
