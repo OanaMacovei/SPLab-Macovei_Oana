@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import org.example.AllBooksSubject;
 import org.example.Book;
 import org.example.commands.CommandExecutor;
 import org.example.commands.CreateBookCommand;
@@ -17,10 +18,19 @@ import java.util.List;
 public class BooksController {
     private BookService booksService;
     private CommandExecutor executor;
+    private AllBooksSubject allBooksSubject;
 
-    public BooksController(BookService booksService, CommandExecutor executor) {
+    public BooksController(BookService booksService, CommandExecutor executor, AllBooksSubject allBooksSubject) {
         this.booksService = booksService;
+        this.allBooksSubject = allBooksSubject;
         this.executor = executor;
+    }
+
+    @PostMapping
+    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+        Book savedBook = booksService.createBook(book);
+        allBooksSubject.add(savedBook);
+        return ResponseEntity.ok(savedBook);
     }
 
     @GetMapping
@@ -36,14 +46,15 @@ public class BooksController {
         return book != null ? ResponseEntity.ok(book) : ResponseEntity.notFound().build();
     }
 
-    // 3. POST /books - Asincron (returneaza 202 ACCEPTED si un tracking ID)
-    @PostMapping
-    public ResponseEntity<String> createBook(@RequestBody Book book) {
-        CreateBookCommand cmd = new CreateBookCommand(booksService, book);
-        String trackingId = executor.executeAsync(cmd);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Comanda acceptata spre procesare. Tracking ID: " + trackingId);
-    }
+//    // 3. POST /books - Asincron (returneaza 202 ACCEPTED si un tracking ID)
+//    @PostMapping
+//    public ResponseEntity<String> createBook(@RequestBody Book book) {
+//        CreateBookCommand cmd = new CreateBookCommand(booksService, book);
+//        String trackingId = executor.executeAsync(cmd);
+//        return ResponseEntity.status(HttpStatus.ACCEPTED)
+//                .body("Comanda acceptata spre procesare. Tracking ID: " + trackingId);
+//    }
+
 
     // Ruta suplimentara pentru verificarea statusului taskului asincron (Task 16.d)
     @GetMapping("/status/{trackingId}")
